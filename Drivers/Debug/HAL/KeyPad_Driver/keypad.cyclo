@@ -1,0 +1,2 @@
+keypad.c:17:6:keypad_init	1
+keypad.c:64:6:keypad_get_char	25

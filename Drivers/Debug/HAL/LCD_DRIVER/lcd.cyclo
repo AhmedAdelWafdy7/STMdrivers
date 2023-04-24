@@ -1,0 +1,12 @@
+lcd.c:14:13:delay_ms	3
+lcd.c:23:6:LCD_GPIO_init	1
+lcd.c:89:6:lcd_is_busy	1
+lcd.c:135:6:lcd_kick	1
+lcd.c:142:6:lcd_send_command	1
+lcd.c:150:6:lcd_init	1
+lcd.c:162:6:lcd_send_char	1
+lcd.c:171:6:lcd_send_string	4
+lcd.c:188:6:lcd_set_position	5
+lcd.c:201:6:lcd_clear	1
+lcd.c:205:6:lcd_send_number	1
+lcd.c:212:6:lcd_send_real_number	2

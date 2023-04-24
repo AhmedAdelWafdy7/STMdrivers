@@ -21,11 +21,19 @@
 //-----------------------------
 //-----------------------------
 
-#define FLASH_MEMORY						0x08000000
-#define SYSTEM_MEMORY						0x1FFFF000
-#define SRAM_MEMORY							0x20000000
-#define PERIPHERALS							0x40000000
-#define CORTEX_M3_INTERNAL_PEERIPHERALS		0xE0000000
+#define FLASH_MEMORY						0x08000000UL
+#define SYSTEM_MEMORY						0x1FFFF000UL
+#define SRAM_MEMORY							0x20000000UL
+#define PERIPHERALS							0x40000000UL
+#define CORTEX_M3_INTERNAL_PEERIPHERALS		0xE0000000UL
+//NVIC Register map
+#define NVIC_BASE							0xE000E100UL
+#define NVIC_ISER0							*(volatile uint32_t*)(NVIC_BASE + 0x000)
+#define NVIC_ISER1							*(volatile uint32_t*)(NVIC_BASE + 0x004)
+#define NVIC_ISER2							*(volatile uint32_t*)(NVIC_BASE + 0x008)
+#define NVIC_ICER0							*(volatile uint32_t*)(NVIC_BASE + 0x080)
+#define NVIC_ICER1							*(volatile uint32_t*)(NVIC_BASE + 0x084)
+#define NVIC_ICER2							*(volatile uint32_t*)(NVIC_BASE + 0x088)
 
 //-----------------------------
 //-----------------------------
@@ -84,10 +92,7 @@ typedef struct{
 typedef struct{
 	volatile uint32_t EVCR;
 	volatile uint32_t MAPR;
-	volatile uint32_t EXTICR1;
-	volatile uint32_t EXTICR2;
-	volatile uint32_t EXTICR3;
-	volatile uint32_t EXTICR4;
+	volatile uint32_t EXTICR[4];
 	uint32_t RESERVED;
 	volatile uint32_t MAPR2;
 }AFIO_t;
@@ -113,8 +118,8 @@ typedef struct{
 #define GPIOD					((GPIO_t *)GPIOD_BASE)
 #define GPIOE					((GPIO_t *)GPIOE_BASE)
 
-#define AFIO					((AFIO_T *)AFIO_BASE)
-#define EXTI					((EXTI_T *)EXTI_BASE)
+#define AFIO					((AFIO_t *)AFIO_BASE)
+#define EXTI					((EXTI_t *)EXTI_BASE)
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-* CLOCK ENABLE MACROS  -*-*-*-*-*
@@ -126,6 +131,40 @@ typedef struct{
 #define	RCC_GPIOE_CLK_EN()		(RCC->APB2ENR |= 1<<6)
 #define	RCC_AFIO_CLK_EN()		(RCC->APB2ENR |= 1<<0)
 
+//-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//-*-*-*-*-*-*-*-*-* IVT  -*-*-*-*-*-*-*-*
+//-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+//EXTI
+#define	EXTI0_IRQHandler          			/* EXTI Line0 interrupt                             */
+#define	EXTI1_IRQHandler          			/* EXTI Line1 interrupt                             */
+#define	EXTI2_IRQHandler          			/* EXTI Line2 interrupt                             */
+#define	EXTI3_IRQHandler          			/* EXTI Line3 interrupt                             */
+#define	EXTI4_IRQHandler          			/* EXTI Line4 interrupt                             */
+
+#define	EXTI9_5_IRQHandler        			/* EXTI Line[9:5] interrupts                        */
+
+#define	EXTI15_10_IRQHandler      			/* EXTI Line[15:10] interrupts                      */
+
+//-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//-*-*-* NVIC IRQ (en/dis)able MACROS -*-*
+//-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+#define	NVIC_IRQ6_EXTI0_ENABLE			(NVIC_ISER0 |= 1<<6)
+#define	NVIC_IRQ7_EXTI1_ENABLE			(NVIC_ISER0 |= 1<<7)
+#define	NVIC_IRQ8_EXTI2_ENABLE			(NVIC_ISER0 |= 1<<8)
+#define	NVIC_IRQ9_EXTI3_ENABLE			(NVIC_ISER0 |= 1<<9)
+#define	NVIC_IRQ10_EXTI4_ENABLE			(NVIC_ISER0 |= 1<<10)
+#define	NVIC_IRQ23_EXTI9_5_ENABLE		(NVIC_ISER0 |= 1<<23)
+#define	NVIC_IRQ40_EXTI10_15_ENABLE		(NVIC_ISER1 |= 1<<8)//40-32=8 position-bit
+
+
+#define	NVIC_IRQ6_EXTI0_DISABLE			(NVIC_ICER0 |= 1<<6)
+#define	NVIC_IRQ7_EXTI1_DISABLE			(NVIC_ICER0 |= 1<<7)
+#define	NVIC_IRQ8_EXTI2_DISABLE			(NVIC_ICER0 |= 1<<8)
+#define	NVIC_IRQ9_EXTI3_DISABLE			(NVIC_ICER0 |= 1<<9)
+#define	NVIC_IRQ10_EXTI4_DISABLE		(NVIC_ICER0 |= 1<<10)
+#define	NVIC_IRQ23_EXTI9_5_DISABLE		(NVIC_ICER0 |= 1<<23)
+#define	NVIC_IRQ40_EXTI10_15_DISABLE	(NVIC_ICER1 |= 1<<8)//40-32=8 position-bit
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-*-* GENERIC MACROS -*-*-*-*-*-*-*

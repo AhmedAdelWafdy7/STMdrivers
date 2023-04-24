@@ -22,7 +22,11 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+HAL/7Segment \
+HAL/KeyPad_Driver \
+HAL/LCD_DRIVER \
 Src \
 Startup \
 Stm32_F103C6_Drivers/GPIO \
+Stm32_F103C6_Drivers \
 

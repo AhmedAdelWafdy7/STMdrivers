@@ -1,0 +1,2 @@
+../HAL/KeyPad_Driver/keypad.c:17:6:keypad_init	16	static
+../HAL/KeyPad_Driver/keypad.c:64:6:keypad_get_char	16	static

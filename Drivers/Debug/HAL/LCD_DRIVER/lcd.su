@@ -1,0 +1,12 @@
+../HAL/LCD_DRIVER/lcd.c:14:13:delay_ms	24	static
+../HAL/LCD_DRIVER/lcd.c:23:6:LCD_GPIO_init	8	static
+../HAL/LCD_DRIVER/lcd.c:89:6:lcd_is_busy	8	static
+../HAL/LCD_DRIVER/lcd.c:135:6:lcd_kick	8	static
+../HAL/LCD_DRIVER/lcd.c:142:6:lcd_send_command	16	static
+../HAL/LCD_DRIVER/lcd.c:150:6:lcd_init	8	static
+../HAL/LCD_DRIVER/lcd.c:162:6:lcd_send_char	16	static
+../HAL/LCD_DRIVER/lcd.c:171:6:lcd_send_string	24	static
+../HAL/LCD_DRIVER/lcd.c:188:6:lcd_set_position	16	static
+../HAL/LCD_DRIVER/lcd.c:201:6:lcd_clear	8	static
+../HAL/LCD_DRIVER/lcd.c:205:6:lcd_send_number	24	static
+../HAL/LCD_DRIVER/lcd.c:212:6:lcd_send_real_number	64	static

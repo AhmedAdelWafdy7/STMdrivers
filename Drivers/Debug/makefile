@@ -10,8 +10,12 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Stm32_F103C6_Drivers/GPIO/subdir.mk
+-include Stm32_F103C6_Drivers/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
+-include HAL/LCD_DRIVER/subdir.mk
+-include HAL/KeyPad_Driver/subdir.mk
+-include HAL/7Segment/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -60,8 +64,8 @@ all: main-build
 main-build: Drivers.elf secondary-outputs
 
 # Tool invocations
-Drivers.elf Drivers.map: $(OBJS) $(USER_OBJS) C:\Users\user\STM32CubeIDE\workspace_1.12.0\Drivers\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -gdwarf-2 -o "Drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\user\STM32CubeIDE\workspace_1.12.0\Drivers\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Drivers.elf Drivers.map: $(OBJS) $(USER_OBJS) D:\embeded\ Systems\STMdrivers\Drivers\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -gdwarf-2 -o "Drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\embeded Systems\STMdrivers\Drivers\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
