@@ -187,10 +187,10 @@ void lcd_send_string(unsigned char* The_char)
 }
 void lcd_set_position(unsigned char line ,unsigned char pos)
 {
-	if(line == 0){
+	if(line == 1){
 		if(pos <16 && pos>=0){
 			lcd_send_command(LCD_BEGIN_AT_FIRST_RAW+pos);
-		}else if(line == 1){
+		}else if(line == 2){
 			if(pos <16 && pos>=0){
 				lcd_send_command(LCD_BEGIN_AT_SECOND_RAW+pos);
 				}
