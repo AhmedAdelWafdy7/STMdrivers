@@ -27,6 +27,8 @@ HAL/KeyPad_Driver \
 HAL/LCD_DRIVER \
 Src \
 Startup \
+Stm32_F103C6_Drivers/EXTI \
 Stm32_F103C6_Drivers/GPIO \
-Stm32_F103C6_Drivers \
+Stm32_F103C6_Drivers/RCC \
+Stm32_F103C6_Drivers/USART \
 

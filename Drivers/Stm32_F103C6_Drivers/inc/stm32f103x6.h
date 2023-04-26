@@ -51,10 +51,13 @@
 //Base addresses for APB1 Peripherals
 //-----------------------------
 
+#define USART2_BASE								0x40004400UL
+#define USART3_BASE								0x40004800UL
 
 //-----------------------------
 //Base addresses for APB2 Peripherals
 //-----------------------------
+#define USART1_BASE								0x40013800UL
 
 //GPIO
 //A,B fully included in LQFP48 Package
@@ -115,6 +118,20 @@ typedef struct
 	volatile uint32_t PR;
 }EXTI_t;
 
+//-*-*-*-*-*-*-*-*-*-*-*-
+//Peripheral register: USART
+//-*-*-*-*-*-*-*-*-*-*-*
+typedef struct
+{
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t BRR;
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
+	volatile uint32_t GTPR;
+}USART_t;
+
 
 //-*-*-*-*-*-*-*-*-*-*-*-
 //Peripheral register: RCC
@@ -138,37 +155,54 @@ typedef struct
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-* PERIPHERAL INSTANTS -*-*-*-*-*
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//RCC
 #define RCC						((RCC_t *)RCC_BASE)
-
+//GPIO
 #define GPIOA					((GPIO_t *)GPIOA_BASE)
 #define GPIOB					((GPIO_t *)GPIOB_BASE)
 #define GPIOC					((GPIO_t *)GPIOC_BASE)
 #define GPIOD					((GPIO_t *)GPIOD_BASE)
 #define GPIOE					((GPIO_t *)GPIOE_BASE)
-
+//AFIO
 #define AFIO					((AFIO_t *)AFIO_BASE)
+//EXTI
 #define EXTI					((EXTI_t *)EXTI_BASE)
+//USART
+#define USART1					((USART_t *)USART1_BASE)
+#define USART2					((USART_t *)USART2_BASE)
+#define USART3					((USART_t *)USART3_BASE)
+
 
 
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-* CLOCK ENABLE MACROS  -*-*-*-*-*
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+//GPIO
 #define RCC_GPIOA_CLK_EN()		(RCC->APB2ENR |= 1 << 2)
 #define RCC_GPIOB_CLK_EN()		(RCC->APB2ENR |= 1 << 3)
 #define RCC_GPIOC_CLK_EN()		(RCC->APB2ENR |= 1 << 4)
 #define RCC_GPIOD_CLK_EN()		(RCC->APB2ENR |= 1 << 5)
 #define RCC_GPIOE_CLK_EN()		(RCC->APB2ENR |= 1 << 6)
-
+//AFIO
 #define RCC_AFIO_CLK_EN()		(RCC->APB2ENR |= 1 << 0)
 
+//USART
+#define RCC_USART1_CLK_EN()		(RCC->APB2ENR |= 1 << 14)
+#define RCC_USART2_CLK_EN()		(RCC->APB1ENR |= 1 << 17)
+#define RCC_USART3_CLK_EN()		(RCC->APB1ENR |= 1 << 18)
+
+#define RCC_USART1_CLK_RESET()	(RCC->APB2RSTR |= 1 << 14)
+#define RCC_USART2_CLK_RESET()	(RCC->APB1RSTR |= 1 << 17)
+#define RCC_USART3_CLK_RESET()	(RCC->APB1RSTR |= 1 << 18)
 
 
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-*-*-*-*-*-* IVT  -*-*-*-*-*-*-*-*
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
+//EXTI
 #define EXTI0_IRQ	6
 #define EXTI1_IRQ	7
 #define EXTI2_IRQ	8
@@ -185,6 +219,11 @@ typedef struct
 #define EXTI13_IRQ	40
 #define EXTI14_IRQ	40
 #define EXTI15_IRQ	40
+
+//USART
+#define USART1_IRQ	37
+#define USART2_IRQ	38
+#define USART3_IRQ	39
 
 
 
@@ -208,6 +247,14 @@ typedef struct
 #define	NVIC_IRQ23_EXTI9_5_DISABLE		(NVIC_ICER0 |= 1<<23)
 #define	NVIC_IRQ40_EXTI10_15_DISABLE	(NVIC_ICER1 |= 1<<8)//40-32=8 position-bit
 
+
+#define	NVIC_IRQ37_USART1_ENABLE		(NVIC_ISER1 |= 1<<5)//37-32=5
+#define	NVIC_IRQ38_USART2_ENABLE		(NVIC_ISER1 |= 1<<6)//38-32=6
+#define	NVIC_IRQ39_USART3_ENABLE		(NVIC_ISER1 |= 1<<7)//39-32=7
+
+#define	NVIC_IRQ37_USART1_DISABLE		(NVIC_ICER1 |= 1<<5)//37-32=5
+#define	NVIC_IRQ38_USART2_DISABLE		(NVIC_ICER1 |= 1<<6)//38-32=6
+#define	NVIC_IRQ39_USART3_DISABLE		(NVIC_ICER1 |= 1<<7)//39-32=7
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 //-*-*-*-*-* GENERIC MACROS -*-*-*-*-*-*-*
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

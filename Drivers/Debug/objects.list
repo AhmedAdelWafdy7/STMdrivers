@@ -5,5 +5,7 @@
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f103c6tx.o"
+"./Stm32_F103C6_Drivers/EXTI/Stm32_F103C6_EXTI.o"
 "./Stm32_F103C6_Drivers/GPIO/Stm32_F103C6_GPIO.o"
-"./Stm32_F103C6_Drivers/Stm32_F103C6_EXTI.o"
+"./Stm32_F103C6_Drivers/RCC/Stm32_F103C6_RCC.o"
+"./Stm32_F103C6_Drivers/USART/Stm32_F103C6_USART.o"
