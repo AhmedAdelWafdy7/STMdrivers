@@ -18,12 +18,12 @@
 #define DATA_shift					0
 #define LCD_CTRL					GPIOA
 #define RS							GPIO_PIN_8
-#define RW							GPIO_PIN_9
-#define EN							GPIO_PIN_10
+#define RW							GPIO_PIN_11
+#define EN							GPIO_PIN_12
 
 
 //#define EIGHT_BIT_MODE
-//#define FOUR_BIT_MODE
+#define FOUR_BIT_MODE
 
 //commands
 

@@ -157,7 +157,7 @@ void lcd_init(void)
 	lcd_send_command(LCD_8BIT_MODE_2_LINE);
 	lcd_send_command(LCD_ENTERY_MODE_INC_SHIFT_OFF);
 	lcd_send_command(LCD_BEGIN_AT_FIRST_RAW);
-	lcd_send_command(LCD_DISPLAY_ON_UNDERLINE_OFF_CURSOR_ON);
+	lcd_send_command(LCD_DISPLAY_ON_UNDERLINE_ON_CURSOR_ON);
 }
 void lcd_send_char(unsigned char The_char)
 {
